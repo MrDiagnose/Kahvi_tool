@@ -4,16 +4,13 @@ import shutil #to copy files
 from tkinter.filedialog import *
 from PIL import ImageTk, Image
 shutil.rmtree('temp', ignore_errors = True) #remove temp folder
-#from shutil import make_archive #to create zip archive
-#import pathlib #to create directiory
+
 
 def metadata_window():
-    
-    #from PIL import ImageTk,Image
     top=Toplevel()
     top.grab_set()
-    top.title('Meta Data Creator')
-    top.iconbitmap('icon.ico') #to use icon only ico files work
+    top.title('Metadata Creator')
+    top.iconbitmap('icon.ico')
     top.geometry('600x500')
     top.resizable(False, False)
     '''def radio_button_function(a):
@@ -34,7 +31,12 @@ def metadata_window():
         +'Source: '+EntryBox[8].get()+'\n'
         +'Platform: J2ME\n'
         +'Application Path: '+emulator.get()+'\n'
-        +'Launch command: '+game_name_entry.get()+'.jar'+'\n'
+        +'Launch command: '+game_name_entry.get()+'.jar '
+                      +game_width.get()+' '
+                      +game_height.get()+' '
+                      +zoom_level.get()+' '
+                      +fps.get()+' '
+                      +'\n'
         +'Notes: '+EntryBox[11].get()+'\n'
         +'Author Notes: '+EntryBox[12].get()+'\n'
         )
@@ -125,7 +127,7 @@ def metadata_window():
     frame5.grid(row=9,column=1)
 
     emulator=StringVar()
-    emulator.set('FreeJ2me') #default value
+    emulator.set('Software\FreeLaunch.bat') #default value
     freej2me=Radiobutton(frame5,text='FreeJ2me', var=emulator,value='Software\FreeLaunch.bat')
     freej2me.pack(side=LEFT)
     kemulator_new=Radiobutton(frame5,text='Kemulator', var=emulator,value='Software\KLaunch.bat')
@@ -138,7 +140,32 @@ def metadata_window():
     EntryBox[10].grid_forget()
     frame6=Frame(top)
     frame6.grid(row=10,column=1)
-    game_weidth=Entry()
+    
+    game_width_label=Label(frame6, text='Width')
+    game_width_label.grid(row=0,column=0)
+    
+    game_height_label=Label(frame6, text='Height')
+    game_height_label.grid(row=1,column=0)
+    
+    zoom_level_label=Label(frame6, text='Zoom')
+    zoom_level_label.grid(row=2,column=0)
+    
+    fps_label=Label(frame6, text='FPS')
+    fps_label.grid(row=3,column=0)
+    
+    
+    game_width=Entry(frame6, width=3)
+    game_width.grid(row=0,column=1)
+    
+    game_height=Entry(frame6, width=3)
+    game_height.grid(row=1,column=1)
+    
+    zoom_level=Entry(frame6, width=3)
+    zoom_level.grid(row=2,column=1)
+    
+    fps=Entry(frame6, width=3)
+    fps.grid(row=3,column=1)
+    
     
     top.mainloop()
 
@@ -160,27 +187,11 @@ def open_image(a):
     global ss_image_src, logo_image_src, ss_image, logo_image, ss_flag, logo_flag #set to global otherwise images wont show up due to pythons garbage collector
     
     if a==1:
-        
-        ss_image_src=askopenfilename(initialdir='', filetypes=[('Image files','.png')])
-        des='temp/game/ss.png'
-        try:
-            ss_image=ImageTk.PhotoImage(Image.open(ss_image_src))
-            screenshot_view=Label(image_frame1,image=ss_image)
-            screenshot_view.grid(row=0,column=0)
-            copy_image_files(ss_image_src,des)
-        except AttributeError:
-            print('No screenshot image selected')
-        else:
-            print('No error selecting screenshot image')
-        ss_flag=TRUE
-        check_button()
-    elif a==2:
-      
         logo_image_src=askopenfilename(initialdir='', filetypes=[('Image files','.png')])
         des='temp/game/logo.png'
         try:
             logo_image=ImageTk.PhotoImage(Image.open(logo_image_src))
-            logo_view=Label(image_frame2,image=logo_image)
+            logo_view=Label(image_frame1,image=logo_image)
             logo_view.grid(row=0,column=0)
             copy_image_files(logo_image_src,des)
         except AttributeError:
@@ -189,12 +200,27 @@ def open_image(a):
             print('No error selecting logo image')
         logo_flag=TRUE
         check_button()
-      
-   
+        
+    elif a==2:
+        ss_image_src=askopenfilename(initialdir='', filetypes=[('Image files','.png')])
+        des='temp/game/ss.png'
+        try:
+            ss_image=ImageTk.PhotoImage(Image.open(ss_image_src))
+            screenshot_view=Label(image_frame2,image=ss_image)
+            screenshot_view.grid(row=0,column=0)
+            copy_image_files(ss_image_src,des)
+        except AttributeError:
+            print('No screenshot image selected')
+        else:
+            print('No error selecting screenshot image')
+        ss_flag=TRUE
+        check_button()
+
+
 def open_game():
     
     global game_file_src, game_flag
-    #new_name
+ 
     game_file_src=askopenfilename(initialdir='', filetypes=[('J2ME files','.jar')])
     name=os.path.basename(game_file_src)
     new_name=name[:len(name)-4]
@@ -247,21 +273,16 @@ screenshot_view_default=Label(image_frame2,image=ss_image)
 screenshot_view_default.grid(row=0,column=0)
 
 
-
-
-#colour
-#root.configure(bg='black')
-#image_frame1.configure(bg='black')
-#image_frame2.configure(bg='black')
-
 buttons_frame=LabelFrame(root,text='buttons',padx=10,pady=10)
 buttons_frame.pack(side=BOTTOM)
 
-open_ss=Button(buttons_frame,font=('Verdana', 10),text="Select Screenshot", command = lambda: open_image(1))
+open_logo=Button(buttons_frame,font=('Verdana', 10),text="Select Logo", command = lambda: open_image(1))
+open_logo.pack(fill=X)
+
+open_ss=Button(buttons_frame,font=('Verdana', 10),text="Select Screenshot", command = lambda: open_image(2))
 open_ss.pack(fill=X)
 
-open_logo=Button(buttons_frame,font=('Verdana', 10),text="Select Logo", command = lambda: open_image(2))
-open_logo.pack(fill=X)
+
 
 open_game=Button(buttons_frame,font=('Verdana', 10),text="Select Game", command = open_game)
 open_game.pack(fill=X)
@@ -272,9 +293,7 @@ game_name_entry.pack()
 
 
 next=Button(buttons_frame,font=('Verdana', 10),text="Next",state=DISABLED,command = metadata_window)
-#next=Button(buttons_frame,font=('Verdana', 10),text="Next",command = metadata_window)
-next.pack()
-    
+next.pack()    
 
 
 root.mainloop()
