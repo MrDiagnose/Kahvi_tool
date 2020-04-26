@@ -13,10 +13,20 @@ def metadata_window():
     top.iconbitmap('icon.ico')
     top.geometry('600x500')
     top.resizable(False, False)
-    '''def radio_button_function(a):
-        if a==1 or a==2:
-            if a=='''
-            
+    
+    def cal_scale():
+        height=game_height.get()
+        if (height=='128') or (height=='65'):
+            scale_value='400'
+        elif (height=='160'):
+            scale_value='300'
+
+        elif (height=='208') or (height=='220'):
+            scale_value='200'
+        else:
+            scale_value='100'
+        zoom_level.delete(0, END)
+        zoom_level.insert(0,scale_value)
     def save_to_file():
     
         fileout=open('temp/game/meta.txt','w')
@@ -67,7 +77,7 @@ def metadata_window():
     EntryBox=[0]*13
 
     for i in range(0,13):
-        LabelList[i]=Label(top,text=LabelListText[i],font=('Verdana',16))
+        LabelList[i]=Label(top,text=LabelListText[i],font=('Verdana',12))
         LabelList[i].grid(row=i,column=0)
         EntryBox[i]=Entry(top,font=('Verdana', 16), width=30)
         EntryBox[i].grid(row=i, column=1)
@@ -75,9 +85,9 @@ def metadata_window():
 
 
 
-    save_btn=Button(top,font=('Verdana', 16),text="Save",command=save_to_file)
+    save_btn=Button(top,font=('Verdana', 15),text="SAVE",command=save_to_file)
     save_btn.grid(row=14,column=1)
-    
+   
     #radio buttons
     #Play Mode
     EntryBox[4].grid_forget()
@@ -130,9 +140,11 @@ def metadata_window():
     emulator.set('Software\FreeLaunch.bat') #default value
     freej2me=Radiobutton(frame5,text='FreeJ2me', var=emulator,value='Software\FreeLaunch.bat')
     freej2me.pack(side=LEFT)
-    kemulator_new=Radiobutton(frame5,text='Kemulator', var=emulator,value='Software\KLaunch.bat')
+    freej2me_new=Radiobutton(frame5,text='FreeJ2me(new)', var=emulator,value='Software\FreeLaunch0.4.2.bat')
+    freej2me_new.pack(side=LEFT)
+    kemulator_new=Radiobutton(frame5,text='Kemulator 1.0.3', var=emulator,value='Software\KLaunch.bat')
     kemulator_new.pack(side=LEFT)
-    kemulator_old=Radiobutton(frame5,text='Kemulator', var=emulator,value='Software\KLaunch98.bat')
+    kemulator_old=Radiobutton(frame5,text='Kemulator 9.8', var=emulator,value='Software\KLaunch98.bat')
     kemulator_old.pack(side=LEFT)
     
 
@@ -141,29 +153,34 @@ def metadata_window():
     frame6=Frame(top)
     frame6.grid(row=10,column=1)
     
+    
+    cal_scale_btn=Button(frame6,text='Cal Scale',command=cal_scale)
+    cal_scale_btn.grid(row=2,column=2,padx=10)
+    
+    
     game_width_label=Label(frame6, text='Width')
     game_width_label.grid(row=0,column=0)
     
     game_height_label=Label(frame6, text='Height')
     game_height_label.grid(row=1,column=0)
     
-    zoom_level_label=Label(frame6, text='Zoom')
-    zoom_level_label.grid(row=2,column=0)
+    scale_level_label=Label(frame6, text='Scale/Zoom')
+    scale_level_label.grid(row=2,column=0)
     
     fps_label=Label(frame6, text='FPS')
     fps_label.grid(row=3,column=0)
     
     
-    game_width=Entry(frame6, width=3)
+    game_width=Entry(frame6, width=5)
     game_width.grid(row=0,column=1)
     
-    game_height=Entry(frame6, width=3)
+    game_height=Entry(frame6, width=5)
     game_height.grid(row=1,column=1)
     
-    zoom_level=Entry(frame6, width=3)
+    zoom_level=Entry(frame6, width=5)
     zoom_level.grid(row=2,column=1)
     
-    fps=Entry(frame6, width=3)
+    fps=Entry(frame6, width=5)
     fps.grid(row=3,column=1)
     
     
@@ -292,7 +309,9 @@ game_name_entry=Entry(buttons_frame,font=('Verdana', 10), width=30)
 game_name_entry.pack()
 
 
-next=Button(buttons_frame,font=('Verdana', 10),text="Next",state=DISABLED,command = metadata_window)
+#next=Button(buttons_frame,font=('Verdana', 10),text="Next",state=DISABLED,command = metadata_window)
+next=Button(buttons_frame,font=('Verdana', 10),text="Next",command = metadata_window)
+
 next.pack()    
 
 
