@@ -10,7 +10,7 @@ def metadata_window():
     top=Toplevel()
     top.grab_set()
     top.title('Metadata Creator')
-    top.iconbitmap('icon.ico')
+    top.iconbitmap('resources/icon.ico')
     top.geometry('600x500')
     top.resizable(False, False)
     
@@ -264,7 +264,7 @@ def copy_image_files(source,destination):
     
 root=Tk()
 root.title('Kahvibreak Curation Tool v1.0')
-root.iconbitmap('icon.ico')
+root.iconbitmap('resources/icon.ico')
 root.geometry('500x500')
 root.resizable(False, False)
 
@@ -273,10 +273,10 @@ image_frame_master=Frame()
 image_frame_master.pack(side=TOP)
 image_frame_master.configure(bg='green')
 
-default_logo='logo.png'
+default_logo='resources/logo.png'
 image_frame1=LabelFrame(image_frame_master, text='Logo',width=100,height=100)
 image_frame1.pack(side=LEFT)
-default_ss='ss.png'
+default_ss='resources/ss.png'
 image_frame2=LabelFrame(image_frame_master, text='Screen Shot',width=100,height=100)
 image_frame2.pack(side=LEFT)
 
