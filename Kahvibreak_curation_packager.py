@@ -309,8 +309,8 @@ game_name_entry=Entry(buttons_frame,font=('Verdana', 10), width=30)
 game_name_entry.pack()
 
 
-#next=Button(buttons_frame,font=('Verdana', 10),text="Next",state=DISABLED,command = metadata_window)
-next=Button(buttons_frame,font=('Verdana', 10),text="Next",command = metadata_window)
+next=Button(buttons_frame,font=('Verdana', 10),text="Next",state=DISABLED,command = metadata_window)
+#next=Button(buttons_frame,font=('Verdana', 10),text="Next",command = metadata_window)
 
 next.pack()    
 
