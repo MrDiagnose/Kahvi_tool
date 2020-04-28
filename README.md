@@ -6,5 +6,5 @@ After installing python type "pip install pillow" without quotes in cmd/terminal
 
 ## SCREENSHOTS
 
-![Screenshot 1](https://github.com/MrDiagnose/Kahvi_tool/blob/master/Screenshots/1.jpg)
+![Screenshot 1](https://github.com/MrDiagnose/Kahvi_tool/blob/master/Screenshots/1.JPG)
 ![Screenshot 2](https://github.com/MrDiagnose/Kahvi_tool/blob/master/Screenshots/2.JPG)
