@@ -12,8 +12,17 @@ def metadata_window():
     top.grab_set()
     top.title('Metadata Creator')
     top.iconbitmap('resources/icon.ico')
-    top.geometry('600x500')
+    top.geometry('600x450')
     top.resizable(False, False)
+    
+    #set colour here
+    #top.configure(bg='blue')
+    #   '#F0F0F0' is the default bg colour of tkinter
+    top['bg'] = '#F0F0F0'
+    label_font_colour='black'
+    label_bg_colour='#F0F0F0'
+    radio_font_colour='black'
+    radio_bg_colour= '#F0F0F0'
     
     
     
@@ -87,8 +96,7 @@ def metadata_window():
         kemulator_9_8_dir=soft_dir[3].strip()
         jre_1_4_dir=soft_dir[4].strip()
         jre_1_8_dir=soft_dir[5].strip()
-        print(freej2me_dir+'\n'+
-          freej2me_new_dir)
+       
     except IndexError:
         print("Pls select kahvibreak directory")
    
@@ -138,16 +146,11 @@ def metadata_window():
     EntryBox=[0]*13
 
     for i in range(0,13):
-        LabelList[i]=Label(top,text=LabelListText[i],font=('Verdana',12))
+        LabelList[i]=Label(top,text=LabelListText[i],fg=label_font_colour,bg=label_bg_colour,font=('Verdana',12))
         LabelList[i].grid(row=i,column=0)
-        EntryBox[i]=Entry(top,font=('Verdana', 16), width=30)
+        EntryBox[i]=Entry(top,font=('Verdana', 12), width=40)
         EntryBox[i].grid(row=i, column=1)
 
-
-
-
-    save_btn=Button(top,font=('Verdana', 15),text="SAVE",command=save_to_file)
-    save_btn.grid(row=14,column=1)
    
     #radio buttons
     #Play Mode
@@ -157,9 +160,9 @@ def metadata_window():
 
     play_mode=StringVar()
     play_mode.set('Single Player') #default value
-    single_player=Radiobutton(frame1,text='Single Player',var=play_mode,value='Single Player')
+    single_player=Radiobutton(frame1,text='Single Player',fg=radio_font_colour,bg=radio_bg_colour,var=play_mode,value='Single Player')
     single_player.pack(side=LEFT)
-    multi_player=Radiobutton(frame1,text='Multi Player',var=play_mode,value='Multi Player')
+    multi_player=Radiobutton(frame1,text='Multi Player',fg=radio_font_colour,bg=radio_bg_colour,var=play_mode,value='Multi Player')
     multi_player.pack()
 
     #status mode
@@ -169,9 +172,9 @@ def metadata_window():
 
     status=StringVar()
     status.set('Playable') #default value
-    status_playable=Radiobutton(frame2,text='Playable',var=status,value='Playable')
+    status_playable=Radiobutton(frame2,text='Playable',fg=radio_font_colour,bg=radio_bg_colour,var=status,value='Playable')
     status_playable.pack(side=LEFT)
-    status_unplayable=Radiobutton(frame2,text='Unplayable',var=status,value='Unplayable')
+    status_unplayable=Radiobutton(frame2,text='Unplayable',fg=radio_font_colour,bg=radio_bg_colour,var=status,value='Unplayable')
     status_unplayable.pack()
 
     #Extreme Mode
@@ -181,9 +184,9 @@ def metadata_window():
 
     extreme=StringVar()
     extreme.set('No') #default value
-    no=Radiobutton(frame3,text='No', var=extreme,value='No')
+    no=Radiobutton(frame3,text='No', fg=radio_font_colour,bg=radio_bg_colour, var=extreme,value='No')
     no.pack(side=LEFT)
-    yes=Radiobutton(frame3,text='Yes', var=extreme,value='Yes')
+    yes=Radiobutton(frame3,text='Yes', fg=radio_font_colour,bg=radio_bg_colour,var=extreme,value='Yes')
     yes.pack()
     '''
     #genre
@@ -199,13 +202,13 @@ def metadata_window():
 
     emulator=StringVar()
     emulator.set('Software\FreeLaunch.bat') #default value
-    freej2me=Radiobutton(frame5,text='FreeJ2me', var=emulator,value='Software\FreeLaunch.bat')
+    freej2me=Radiobutton(frame5,text='FreeJ2me', fg=radio_font_colour,bg=radio_bg_colour,var=emulator,value='Software\FreeLaunch.bat')
     freej2me.pack(side=LEFT)
-    freej2me_new=Radiobutton(frame5,text='FreeJ2me(new)', var=emulator,value='Software\FreeLaunch0.4.2.bat')
+    freej2me_new=Radiobutton(frame5,text='FreeJ2me(new)', fg=radio_font_colour,bg=radio_bg_colour,var=emulator,value='Software\FreeLaunch0.4.2.bat')
     freej2me_new.pack(side=LEFT)
-    kemulator_new=Radiobutton(frame5,text='Kemulator v1.0.3', var=emulator,value='Software\KLaunch.bat')
+    kemulator_new=Radiobutton(frame5,text='Kemulator v1.0.3', fg=radio_font_colour,bg=radio_bg_colour,var=emulator,value='Software\KLaunch.bat')
     kemulator_new.pack(side=LEFT)
-    kemulator_old=Radiobutton(frame5,text='Kemulator v9.8', var=emulator,value='Software\KLaunch98.bat')
+    kemulator_old=Radiobutton(frame5,text='Kemulator v9.8', fg=radio_font_colour,bg=radio_bg_colour,var=emulator,value='Software\KLaunch98.bat')
     kemulator_old.pack(side=LEFT)
     
 
@@ -216,11 +219,11 @@ def metadata_window():
     
     
 
-    sel_kahvi_dir_btn=Button(frame6,text='Select Kahvi Direcotry',command=select_kahvi_dir)
+    sel_kahvi_dir_btn=Button(frame6,text='Select Kahvi Directory',command=select_kahvi_dir)
     sel_kahvi_dir_btn.grid(row=0,column=2,padx=10)
-    test_game_btn=Button(frame6,text='Test Game',command=test_game_btn)
+    test_game_btn=Button(frame6,text=    'Test Game',command=test_game_btn)
     test_game_btn.grid(row=1,column=2,padx=10)
-    cal_scale_btn=Button(frame6,text='Cal Scale',command=cal_scale)
+    cal_scale_btn=Button(frame6,text=    'Calculate Scale',command=cal_scale)
     cal_scale_btn.grid(row=2,column=2,padx=10)
     
     game_width_label=Label(frame6, text='Width')
@@ -248,6 +251,9 @@ def metadata_window():
     fps=Entry(frame6, width=5)
     fps.grid(row=3,column=1)
     
+    save_btn=Button(top,font=('Verdana', 15),text="SAVE",command=save_to_file)
+    #save_btn=Button(top,font=('Verdana', 15),bg='green',fg='white',text="SAVE",command=save_to_file)
+    save_btn.grid(row=14,column=1)
     
     top.mainloop()
 
@@ -358,7 +364,7 @@ screenshot_view_default=Label(image_frame2,image=ss_image)
 screenshot_view_default.grid(row=0,column=0)
 
 
-buttons_frame=LabelFrame(root,text='buttons',padx=10,pady=10)
+buttons_frame=LabelFrame(root,text='Must Select All',padx=10,pady=10)
 buttons_frame.pack(side=BOTTOM)
 
 
@@ -378,9 +384,9 @@ open_game.pack(fill=X)
 game_name_entry=Entry(buttons_frame,font=('Verdana', 10), width=30)
 game_name_entry.pack()
 
-
-next=Button(buttons_frame,font=('Verdana', 10),text="Next",state=DISABLED,command = metadata_window)
-#next=Button(buttons_frame,font=('Verdana', 10),text="Next",command = metadata_window)
+next=Button(buttons_frame,font=('Verdana', 10),text="NEXT",state=DISABLED,command = metadata_window)
+#next=Button(buttons_frame,font=('Verdana', 10),text="NEXT",bg='black',fg='white',state=DISABLED,command = metadata_window)
+#next=Button(buttons_frame,font=('Verdana', 10),text="NEXT",bg='black',fg='white',command = metadata_window)
 
 next.pack()    
 
