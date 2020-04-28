@@ -1,0 +1,6 @@
+D:/game/emulator/j2me/Kahvibreak 1.3/Software/FreeJ2ME/freej2me-kahvi-0.4.1.jar
+D:/game/emulator/j2me/Kahvibreak 1.3/Software/FreeJ2ME/freej2me-kahvi-0.4.2.jar
+D:/game/emulator/j2me/Kahvibreak 1.3/Software/KEmulator/KEmulator-1.0.3.jar
+D:/game/emulator/j2me/Kahvibreak 1.3/Software/KEmulator/KEmulator-0.9.8.jar
+D:/game/emulator/j2me/Kahvibreak 1.3/Software/jre-1.4/bin/javaz.exe
+D:/game/emulator/j2me/Kahvibreak 1.3/Software/jre-8/bin/javaz.exe
