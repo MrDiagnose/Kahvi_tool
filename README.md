@@ -3,6 +3,7 @@
 needs [python](https://www.python.org/) to run with pillow library
 
 After installing python type "pip install pillow" without quotes in cmd/terminal to install pillow
+![Command: ](https://github.com/MrDiagnose/Kahvi_tool/blob/master/Screenshots/pip_install.JPG)
 
 ## SCREENSHOTS
 
