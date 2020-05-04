@@ -357,7 +357,7 @@ def copy_image_files(source,destination):
 
     
 root=Tk()
-root.title('Kahvibreak Curation Tool v1.1')
+root.title('Kahvibreak Curation Tool v1.2')
 root.iconbitmap('resources/icon.ico')
 root.geometry('500x500')
 root.resizable(False, False)
