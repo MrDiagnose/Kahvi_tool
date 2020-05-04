@@ -264,6 +264,7 @@ game_flag=FALSE
 
 def check_button():
     if not (ss_flag and logo_flag and game_flag) == FALSE:
+    
         next.config(state=NORMAL)
         print("Next button enabled Enjoy ;)")
     else:
@@ -286,7 +287,7 @@ def open_image(a):
             print('No logo image selected')
         else:
             print('No error selecting logo image')
-        logo_flag=TRUE
+            logo_flag=TRUE
         check_button()
         
     elif a==2:
@@ -301,7 +302,7 @@ def open_image(a):
             print('No screenshot image selected')
         else:
             print('No error selecting screenshot image')
-        ss_flag=TRUE
+            ss_flag=TRUE
         check_button()
 
 
@@ -315,8 +316,12 @@ def open_game():
     underscored_name=new_name.replace(" ", "_")
     game_name_entry.delete(0,END)
     game_name_entry.insert(0,underscored_name)
-    
-    game_flag=TRUE
+        
+    if game_file_src=='':
+        print('No game selected')
+    else:
+        print('No error selecting game')
+        game_flag=TRUE
     check_button()
         
 def copy_image_files(source,destination):
