@@ -87,15 +87,30 @@ def metadata_window():
     #--------------------------test game routine----------------------------------------
     dir_file=open('resources/kahvi_config.txt','r')
     soft_dir=dir_file.readlines()
+    dir_file.close()
+    def set_kemu_property():
+        kemu_property=open('resources/property.txt','r')
+        kemu_property_list=kemu_property.readlines()
+        kemu_property.close()
+        kemu_property_list[5]='CanvasScale='+zoom_level.get()+'\n'
+        kemu_property_list[17]='FrameRate='+fps.get()+'\n'
+        kemu_property_list[58]='SCREEN_WIDTH='+game_width.get()+'\n'
+        kemu_property_list[59]='SCREEN_HEIGHT='+game_height.get()+'\n'
+        kemu_property_set=open(property_dir,'w')
+        for i in kemu_property_list:
+            kemu_property_set.write(i)
+            kemu_property_set.flush()
+        kemu_property_set.close()        
     
     try:
-        global freej2me_dir, freej2me_new_dir,kemulator_1_0_3_dir, kemulator_9_8_dir,kemulator_9_8_dir,Jre_1_4_dir,jre_1_8_dir
+        global freej2me_dir, freej2me_new_dir,kemulator_1_0_3_dir, kemulator_9_8_dir,kemulator_9_8_dir,Jre_1_4_dir,jre_1_8_dir,property_dir
         freej2me_dir=soft_dir[0].strip()
         freej2me_new_dir=soft_dir[1].strip()
         kemulator_1_0_3_dir=soft_dir[2].strip()
         kemulator_9_8_dir=soft_dir[3].strip()
         jre_1_4_dir=soft_dir[4].strip()
         jre_1_8_dir=soft_dir[5].strip()
+        property_dir=soft_dir[6].strip()
        
     except IndexError:
         print("Pls select kahvibreak directory")
@@ -114,7 +129,8 @@ def metadata_window():
                             +kahvi_dir+"/Software/KEmulator/KEmulator-1.0.3.jar"+"\n"
                             +kahvi_dir+"/Software/KEmulator/KEmulator-0.9.8.jar"+"\n"
                             +kahvi_dir+"/Software/jre-1.4/bin/javaz.exe"+"\n"
-                            +kahvi_dir+"/Software/jre-8/bin/javaz.exe")
+                            +kahvi_dir+"/Software/jre-8/bin/javaz.exe"+"\n"
+                            +kahvi_dir+"/Software/KEmulator/property.txt" )
             kahvi_config.close()
     def test_game_btn():
         emulator_var=emulator.get()
@@ -126,10 +142,12 @@ def metadata_window():
             batch_script='start "" "' + jre_1_8_dir+'" -jar "'+freej2me_new_dir+'" "file:///'+game_file_src+'" '+game_width.get()+" "+game_height.get()+" "+zoom_level.get()+" "+fps.get()
 
         elif emulator_var=='Software\KLaunch.bat':
+            set_kemu_property()
             batch_script='start "" "' + jre_1_8_dir+'" -jar "'+kemulator_1_0_3_dir+'" -jar "'+game_file_src
 
         #emulator='Software\KLaunch98.bat'
         else:
+            set_kemu_property()
             batch_script='start "" "' + jre_1_4_dir+'" -jar "'+kemulator_9_8_dir+'" -jar "'+game_file_src
 
         bat_file=open('resources/run_game.bat','w')
